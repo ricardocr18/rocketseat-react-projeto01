@@ -1,4 +1,4 @@
-section {
+.section {
     margin-top: calc(0px - 1rem - 6px); 
     display:flex;
     flex-direction: column;
@@ -87,19 +87,19 @@ section {
     text-align: center;
     font-size: 10px;
     color: var(--gray-100);
-    margin-left: 2px;
+    margin-left: 2px;    
     font-weight: bold;
     
 }
 
-.taskConlcuidas > span {  
+.taskConcluidas > span {  
 
     color: var(--purple);
     font-size: 14px;
     
 }
 
-.taskConlcuidas > p {
+.taskConcluidas > p {
     background: var(--gray-400);
     border: 0;
     border-radius: 8px;
@@ -118,14 +118,13 @@ section {
         flex-direction: row;
         justify-content: left;
         align-items: center;
-        color: var(--gray-100);  /* Criei agora */
+        
         padding: 1rem 0;
         list-style: none;
         
 
 
 }
-
 
 .contentList {
     display: flex;
@@ -156,4 +155,89 @@ section {
 }
 .contentList div label {
     margin-left: 8px;
+}
+
+
+/* ========================= */
+
+.contentList {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 678px;
+    height: 50px;
+    border-radius: 8px;
+    padding: 3px;
+    background: var(--gray-400);
+    color: var(--gray-100);
+    font-size: 14px;
+}
+
+.contentList+.contentList {
+    margin-top: 0.5rem;
+}
+
+.contentList>svg {
+    color: var(--gray-300);
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.contentList>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+}
+
+.containerCheckbox {
+    position: relative;
+    
+}
+
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--blue);
+    
+
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: var(--gray-300); /* Fundo branco vazado */
+    
+}
+
+.checkbox > input[type=checkbox]{
+    position: absolute;
+    
+    width: 12px; 
+    height: 12px;
+    background: var(--purpleDark);
+    
+    
+   
+}
+.checkbox > input[type=checkbox]:checked {
+    
+    position: absolute;  
+    width: 12px; 
+    height: 12px;
+    background-color: var(--purpleDark);
+    text-decoration:line-through;
+}
+
+
+.contentList div label {
+    margin-left: 12px;
+}
+
+.complete {
+    text-decoration:line-through;
+    opacity:0.7
 }

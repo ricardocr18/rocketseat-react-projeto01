@@ -3,15 +3,14 @@ import plus from "../../assets/plus.png";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ITask } from "../../interfaces/iTask";
-import trash from "../../assets/trash.png"
+import trash from "../../assets/trash.png";
 
 export function Task() {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [newTask, setNewTask] = useState("");
 
   // Use o useEffect para logar o estado atualizado sempre que ele mudar
-  useEffect(() => {
-    console.log("Tarefas atualizadas:", tasks);
+  useEffect(() => {    
   }, [tasks]); // Isso vai disparar o useEffect toda vez que 'tasks' mudar
 
   const handleCreateNewFormSubmitTask = (
@@ -36,19 +35,19 @@ export function Task() {
       prevTasks.map((task) =>
         task.id === taskId ? { ...task, isComplete: !task.isComplete } : task
       )
-    );
-    console.log("Total de isComplete: ", tasks);
+    );    
   };
-  
+
+  const handleDeleteTask = (taskId: string) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  };
+
   const compited = tasks.filter((task) => {
     const cont = task.isComplete === true;
     return cont;
   }).length;
 
- 
-  const sumTasks = tasks.length;
-  console.log("Total de tarefas: ", sumTasks);
-
+  const sumTasks = tasks.length; 
   const concluidas = ` ${compited} de ${sumTasks}`;
 
   return (
@@ -77,24 +76,35 @@ export function Task() {
             <span>Tarefas criadas</span>
             <p>{sumTasks}</p>
           </div>
-          <div className={styles.taskConlcuidas}>
+          <div className={styles.taskConcluidas}>
             <span>Concluídas</span>
-            <p>{concluidas}</p>
+            <p> {concluidas}</p>
           </div>
         </header>
         <div>
           <ul className={styles.taskList}>
             {tasks.map((item) => (
-                <li key={item.id}>
+              <li className={styles.contentList} key={item.id}>
+                <div className={styles.containerCheckbox}>
+                  <label className={styles.checkbox}>
                     <input
-                     type="checkbox"
-                     checked={item.isComplete}
-                     onChange={() => handleCompletedTask(item.id)}
-                      />
-                    {item.title}
-                    <img src={trash} alt="Lixeira"/>
-                </li>
-              
+                      type="checkbox"
+                      checked={item.isComplete}
+                      onChange={() => handleCompletedTask(item.id)}
+                    />
+                  </label>
+                  <label className={item.isComplete === true ? styles.complete : ""}>
+                  {item.title}
+                  </label>
+                  <img
+                    src={trash}
+                    alt="Lixeira"
+                    onClick={() => handleDeleteTask(item.id)}
+                    style={{ cursor: "pointer" }}
+                  />
+                  
+                </div>
+              </li>
             ))}
           </ul>
         </div>
